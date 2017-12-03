@@ -1,0 +1,32 @@
+{
+  "name": "edgar/cron-bundle",
+  "license": "GPL-2.0",
+  "type": "symfony-bundle",
+  "description": "Cron scheduler",
+  "authors": [
+    {
+      "name": "Emmanuel DROUET"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Edgar\\CronBundle\\": "src/bundle/",
+      "Edgar\\Cron\\": "src/lib/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": { "Edgar\\CronBundle\\Tests\\": "src/bundle/Tests" }
+  },
+  "require": {
+    "php": ">=7.1",
+    "doctrine/orm": "~2.3",
+    "mtdowling/cron-expression": "^1.2"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "~2.7.1",
+    "phpunit/phpunit": "^6.4"
+  },
+  "scripts": {
+    "fix-cs": "@php ./vendor/bin/php-cs-fixer fix -v --show-progress=estimating"
+  }
+}
