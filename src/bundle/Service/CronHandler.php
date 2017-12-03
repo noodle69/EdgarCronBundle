@@ -12,7 +12,7 @@ use Edgar\Cron\Cron\CronInterface;
 class CronHandler extends AbstractCron
 {
     /** @var CronInterface[][] $crons crons list */
-    private $crons = array();
+    private $crons = [];
 
     /** @var string $cronAlias cron alias */
     protected $cronAlias;
@@ -30,7 +30,7 @@ class CronHandler extends AbstractCron
      * @param integer $cronPriority
      * @param array $arguments
      */
-    public function __construct(string $cronAlias = '', int $cronPriority = 0, array $arguments = array())
+    public function __construct(string $cronAlias = '', int $cronPriority = 0, array $arguments = [])
     {
         parent::__construct($cronAlias);
         $this->cronAlias = $cronAlias;
@@ -49,7 +49,7 @@ class CronHandler extends AbstractCron
     public function addCron(CronInterface $cron, string $alias, int $priority, string $arguments)
     {
         if (!isset($this->crons[$priority])) {
-            $this->crons[$priority] = array();
+            $this->crons[$priority] = [];
         }
         $cron->setAlias($alias);
         $cron->addArguments($arguments);

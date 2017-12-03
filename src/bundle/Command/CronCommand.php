@@ -36,7 +36,7 @@ class CronCommand extends ContainerAwareCommand
         /** @var CronService $cronService */
         $cronService = $this->getContainer()->get(CronService::class);
         /** @var CronInterface[] $cronsDue */
-        $cronsDue = array();
+        $cronsDue = [];
 
         /** @var CronInterface[] $crons */
         $crons = $cronService->getCrons();

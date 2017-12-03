@@ -35,18 +35,18 @@ class CronStatusCommand extends ContainerAwareCommand
         $cronRows = [];
 
         foreach ($crons as $cron) {
-            $cronRows[] = array(
+            $cronRows[] = [
                 $cron->getAlias(),
                 $cron instanceof EdgarCron ? $cron->getQueued()->format('d-m-Y H:i') : false,
                 $cron instanceof EdgarCron ? $cron->getStarted()->format('d-m-Y H:i') : false,
                 $cron instanceof EdgarCron ? $cron->getEnded()->format('d-m-Y H:i') : false,
                 $cron instanceof EdgarCron ? $cron->getStatus() : false
-            );
+            ];
         }
 
         $table = new Table($output);
         $table
-            ->setHeaders(array('Cron Alias', 'Queued', 'Started', 'Ended', 'Status'))
+            ->setHeaders(['Cron Alias', 'Queued', 'Started', 'Ended', 'Status'])
             ->setRows($cronRows);
         $table->render();
     }

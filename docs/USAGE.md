@@ -54,10 +54,10 @@ services:
     your.cron.foo:
         class: %your.cron.foo.class%
         tags:
-            - { name: smile.cron, alias: foo, priority: 200, arguments: 'foo:fooarg' }
+            - { name: edgar.cron, alias: foo, priority: 200, arguments: 'foo:fooarg' }
 ```
 
-* Your command (cron) is tagged with "smile.cron".
+* Your command (cron) is tagged with "edgar.cron".
 * You should define an alias
 * priority is not mandatory
 * arguments is not mandatory

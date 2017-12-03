@@ -110,7 +110,7 @@ class CronService
         /** @var CronInterface[] $crons */
         $crons = $this->getCrons();
         /** @var CronInterface[] $cronAlias */
-        $cronAlias = array();
+        $cronAlias = [];
 
         foreach ($crons as $cron) {
             $cronAlias[$cron->getAlias()] = $cron;

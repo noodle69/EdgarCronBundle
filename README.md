@@ -12,10 +12,10 @@ Cron Bundle scheduler
 This bundle offer a command that you should use as a cronjob :
 
 ```cmd
-* * * * * cd <your_project_root> && php app/console smile:crons:run
+* * * * * cd <your_project_root> && php bin/console edgar:crons:run
 ```
 
-This command will list all commands extending "CronAbstract" class and defined as service tagged with "smile.cron".
+This command will list all commands extending "AbstractCron" class and defined as service tagged with "edgar.cron".
 
 You can define specific cron expression for each command as cron and prioritize them.
 
