@@ -30,7 +30,7 @@ class CronHandler extends AbstractCron
      * @param integer $cronPriority
      * @param array $arguments
      */
-    public function __construct(string $cronAlias = '', int $cronPriority = 0, array $arguments = [])
+    public function __construct(string $cronAlias = null, int $cronPriority = 0, array $arguments = [])
     {
         parent::__construct($cronAlias);
         $this->cronAlias = $cronAlias;

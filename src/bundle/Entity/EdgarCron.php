@@ -1,6 +1,6 @@
 <?php
 
-namespace Edgar\Cron\Entity;
+namespace Edgar\CronBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

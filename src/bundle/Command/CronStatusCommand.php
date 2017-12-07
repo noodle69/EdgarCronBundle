@@ -2,7 +2,7 @@
 
 namespace Edgar\CronBundle\Command;
 
-use Edgar\Cron\Entity\EdgarCron;
+use Edgar\CronBundle\Entity\EdgarCron;
 use Edgar\CronBundle\Service\CronService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\Table;

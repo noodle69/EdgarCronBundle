@@ -4,4 +4,6 @@ services:
         autoconfigure: true
         public: false
 
-    Edgar\CronBundle\Service: ~
+    Edgar\CronBundle\Service\:
+        resource: "../../Service/*"
+        public: true

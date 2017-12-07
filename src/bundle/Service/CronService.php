@@ -4,7 +4,7 @@ namespace Edgar\CronBundle\Service;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Edgar\Cron\Cron\CronInterface;
-use Edgar\Cron\Entity\EdgarCron;
+use Edgar\CronBundle\Entity\EdgarCron;
 use Edgar\Cron\Repository\EdgarCronRepository;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -31,7 +31,7 @@ class CronService
     {
         $this->cronHandler = $cronHandler;
         $entityManager = $doctrineRegistry->getManager();
-        $this->repository = $entityManager->getRepository('EdgarCron:EdgarCron');
+        $this->repository = $entityManager->getRepository(EdgarCron::class);
     }
 
     /**
