@@ -4,6 +4,7 @@ namespace Edgar\CronBundle\Service;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Edgar\Cron\Cron\CronInterface;
+use Edgar\Cron\Handler\CronHandler;
 use Edgar\CronBundle\Entity\EdgarCron;
 use Edgar\Cron\Repository\EdgarCronRepository;
 use Symfony\Component\Console\Input\InputInterface;
@@ -92,7 +93,7 @@ class CronService
      * @param EdgarCron $edgarCron
      * @param int $status
      */
-    public function end(EdgarCron $edgarCron, int $status)
+    public function end(EdgarCron $edgarCron, ?int $status)
     {
         $this->repository->end($edgarCron, $status);
     }

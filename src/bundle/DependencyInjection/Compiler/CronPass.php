@@ -2,6 +2,7 @@
 
 namespace Edgar\CronBundle\DependencyInjection\Compiler;
 
+use Edgar\Cron\Handler\CronHandler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -20,20 +21,21 @@ class CronPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has('edgar.cron.handler')) {
+        if (!$container->has(CronHandler::class)) {
             return;
         }
 
-        $definition = $container->findDefinition('edgar.cron.handler');
+        $definition = $container->findDefinition(CronHandler::class);
 
         $taggedServices = $container->findTaggedServiceIds('edgar.cron');
+
         foreach ($taggedServices as $id => $tags) {
             foreach ($tags as $attributes) {
                 $definition->addMethodCall('addCron', [
                     new Reference($id),
                     $attributes['alias'],
                     !isset($attributes['priority']) ? 0 : (int)$attributes['priority'],
-                    !isset($attributes['arguments']) ? '': $attributes['arguments']
+                    !isset($attributes['arguments']) ? '': $attributes['arguments'],
                 ]);
             }
         }

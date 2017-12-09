@@ -101,7 +101,7 @@ class EdgarCron
      *
      * @return EdgarCron
      */
-    public function setStarted(int $started): self
+    public function setStarted(?\DateTime $started): self
     {
         $this->started = $started;
         return $this;
@@ -112,7 +112,7 @@ class EdgarCron
      *
      * @return \DateTime
      */
-    public function getStarted(): int
+    public function getStarted(): \DateTime
     {
         return $this->started;
     }
@@ -124,7 +124,7 @@ class EdgarCron
      *
      * @return EdgarCron
      */
-    public function setEnded($ended): self
+    public function setEnded(?\DateTime $ended): self
     {
         $this->ended = $ended;
         return $this;
@@ -135,7 +135,7 @@ class EdgarCron
      *
      * @return \DateTime
      */
-    public function getEnded()
+    public function getEnded(): \DateTime
     {
         return $this->ended;
     }
@@ -147,7 +147,7 @@ class EdgarCron
      *
      * @return EdgarCron
      */
-    public function setStatus(int $status): self
+    public function setStatus(?int $status): self
     {
         $this->status = $status;
         return $this;
@@ -158,7 +158,7 @@ class EdgarCron
      *
      * @return integer
      */
-    public function getStatus(): int
+    public function getStatus(): ?int
     {
         return $this->status;
     }

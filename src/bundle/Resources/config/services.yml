@@ -4,6 +4,12 @@ services:
         autoconfigure: true
         public: false
 
+    Edgar\Cron\Handler\:
+        resource: "../../../lib/Handler/*"
+        public: true
+
     Edgar\CronBundle\Service\:
         resource: "../../Service/*"
         public: true
+
+

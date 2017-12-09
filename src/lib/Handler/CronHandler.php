@@ -1,15 +1,14 @@
 <?php
 
-namespace Edgar\CronBundle\Service;
+namespace Edgar\Cron\Handler;
 
-use Edgar\Cron\Cron\AbstractCron;
 use Edgar\Cron\Cron\CronInterface;
 
 /**
  * Class CronHandler
- * @package Edgar\Cron\Cron
+ * @package Edgar\Cron\Handler
  */
-class CronHandler extends AbstractCron
+class CronHandler
 {
     /** @var CronInterface[][] $crons crons list */
     private $crons = [];
@@ -32,7 +31,6 @@ class CronHandler extends AbstractCron
      */
     public function __construct(string $cronAlias = null, int $cronPriority = 0, array $arguments = [])
     {
-        parent::__construct($cronAlias);
         $this->cronAlias = $cronAlias;
         $this->cronPriority = $cronPriority;
         $this->cronArguments = $arguments;

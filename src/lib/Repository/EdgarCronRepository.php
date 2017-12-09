@@ -5,7 +5,7 @@ namespace Edgar\Cron\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
-use Edgar\Cron\Entity\EdgarCron;
+use Edgar\CronBundle\Entity\EdgarCron;
 
 /**
  * Class EdgarCronRepository
@@ -55,6 +55,11 @@ class EdgarCronRepository extends EntityRepository
             /** @var EdgarCron $edgarCron */
             $edgarCron = $query->setMaxResults(1)->getOneOrNullResult();
         } catch (NonUniqueResultException $e) {
+            $edgarCron = new EdgarCron();
+            $edgarCron->setAlias($alias);
+        }
+
+        if (!$edgarCron) {
             $edgarCron = new EdgarCron();
             $edgarCron->setAlias($alias);
         }
@@ -110,7 +115,7 @@ class EdgarCronRepository extends EntityRepository
      * @param EdgarCron $edgarCron cron command
      * @param int $status cron command status
      */
-    public function end(EdgarCron $edgarCron, int $status = 0)
+    public function end(EdgarCron $edgarCron, ?int $status = 0)
     {
         $now = new \DateTime('now');
         $edgarCron->setEnded($now);
