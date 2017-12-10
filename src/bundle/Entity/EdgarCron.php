@@ -42,9 +42,9 @@ class EdgarCron
     private $ended;
 
     /**
-     * @var integer
+     * @var int
      *
-     * @ORM\Column(name="status", type="integer", nullable=true)
+     * @ORM\Column(name="status", type="integer", nullable=false)
      */
     private $status = '0';
 
@@ -78,7 +78,7 @@ class EdgarCron
      *
      * @return EdgarCron
      */
-    public function setQueued($queued): self
+    public function setQueued(\DateTime $queued): self
     {
         $this->queued = $queued;
         return $this;
@@ -89,7 +89,7 @@ class EdgarCron
      *
      * @return \DateTime
      */
-    public function getQueued()
+    public function getQueued(): \DateTime
     {
         return $this->queued;
     }
@@ -135,7 +135,7 @@ class EdgarCron
      *
      * @return \DateTime
      */
-    public function getEnded(): \DateTime
+    public function getEnded(): ?\DateTime
     {
         return $this->ended;
     }
@@ -147,7 +147,7 @@ class EdgarCron
      *
      * @return EdgarCron
      */
-    public function setStatus(?int $status): self
+    public function setStatus(int $status): self
     {
         $this->status = $status;
         return $this;
@@ -158,7 +158,7 @@ class EdgarCron
      *
      * @return integer
      */
-    public function getStatus(): ?int
+    public function getStatus(): int
     {
         return $this->status;
     }

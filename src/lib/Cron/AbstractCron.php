@@ -3,6 +3,7 @@
 namespace Edgar\Cron\Cron;
 
 use Cron\CronExpression;
+use Edgar\Cron\Repository\EdgarCronRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
@@ -57,7 +58,12 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
      */
     public function run(InputInterface $input, OutputInterface $output): ?int
     {
-        return $this->execute($input, $output);
+        $return = $this->execute($input, $output);
+        if (is_null($return)) {
+            $return = EdgarCronRepository::STATUS_OK;
+        }
+
+        return $return;
     }
 
     /**

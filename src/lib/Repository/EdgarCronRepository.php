@@ -13,6 +13,10 @@ use Edgar\CronBundle\Entity\EdgarCron;
  */
 class EdgarCronRepository extends EntityRepository
 {
+    public const STATUS_INIT = 0;
+    public const STATUS_OK = 1;
+    public const STATUS_ERROR = 2;
+
     /**
      * Identify of cron command is queued
      *
@@ -115,7 +119,7 @@ class EdgarCronRepository extends EntityRepository
      * @param EdgarCron $edgarCron cron command
      * @param int $status cron command status
      */
-    public function end(EdgarCron $edgarCron, ?int $status = 0)
+    public function end(EdgarCron $edgarCron, int $status = 0)
     {
         $now = new \DateTime('now');
         $edgarCron->setEnded($now);

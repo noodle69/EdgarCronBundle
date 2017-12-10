@@ -93,7 +93,7 @@ class CronService
      * @param EdgarCron $edgarCron
      * @param int $status
      */
-    public function end(EdgarCron $edgarCron, ?int $status)
+    public function end(EdgarCron $edgarCron, int $status = 0)
     {
         $this->repository->end($edgarCron, $status);
     }
