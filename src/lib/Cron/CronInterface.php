@@ -43,7 +43,7 @@ interface CronInterface
      *
      * @param string $arguments cron arguments
      */
-    public function addArguments(string $arguments = '');
+    public function addArguments(?string $arguments = null);
 
     /**
      * Return cron arguments

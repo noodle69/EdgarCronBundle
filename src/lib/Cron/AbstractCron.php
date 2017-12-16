@@ -100,7 +100,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
      *
      * @param string $arguments cron arguments
      */
-    public function addArguments(string $arguments = '')
+    public function addArguments(?string $arguments = null)
     {
         $args = [];
         preg_match_all('/(?P<argument>\w+):(?P<value>\w+)/', $arguments, $matches);
