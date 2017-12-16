@@ -3,6 +3,7 @@
 namespace Edgar\CronBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Edgar\Cron\Repository\EdgarCronRepository;
 
 /**
  * EdgarCron
@@ -46,7 +47,7 @@ class EdgarCron
      *
      * @ORM\Column(name="status", type="integer", nullable=false)
      */
-    private $status = '0';
+    private $status = EdgarCronRepository::STATUS_OK;
 
     /**
      * Get alias

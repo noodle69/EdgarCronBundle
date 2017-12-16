@@ -72,7 +72,7 @@ class EdgarCronRepository extends EntityRepository
         $edgarCron->setQueued($now);
         $edgarCron->setStarted(null);
         $edgarCron->setEnded(null);
-        $edgarCron->setStatus(0);
+        $edgarCron->setStatus(self::STATUS_INIT);
         $this->getEntityManager()->persist($edgarCron);
 
         try {
@@ -119,7 +119,7 @@ class EdgarCronRepository extends EntityRepository
      * @param EdgarCron $edgarCron cron command
      * @param int $status cron command status
      */
-    public function end(EdgarCron $edgarCron, int $status = 0)
+    public function end(EdgarCron $edgarCron, int $status = self::STATUS_OK)
     {
         $now = new \DateTime('now');
         $edgarCron->setEnded($now);
