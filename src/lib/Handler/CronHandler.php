@@ -19,6 +19,8 @@ class CronHandler
     /** @var integer $cronPriority cron priority */
     protected $cronPriority;
 
+    protected $cronExpression;
+
     /** @var array $cronArguments cron arguments */
     protected $cronArguments;
 
@@ -29,10 +31,15 @@ class CronHandler
      * @param integer $cronPriority
      * @param array $arguments
      */
-    public function __construct(string $cronAlias = null, int $cronPriority = 0, array $arguments = [])
-    {
+    public function __construct(
+        string $cronAlias = null,
+        int $cronPriority = 0,
+        string $cronExpression = '* * * * *',
+        array $arguments = []
+    ) {
         $this->cronAlias = $cronAlias;
         $this->cronPriority = $cronPriority;
+        $this->cronExpression = $cronExpression;
         $this->cronArguments = $arguments;
     }
 
@@ -42,9 +49,10 @@ class CronHandler
      * @param CronInterface $cron cron
      * @param string $alias cron alias
      * @param int $priority cron priority
+     * @param string $expression
      * @param string $arguments cron arguments
      */
-    public function addCron(CronInterface $cron, string $alias, int $priority, string $arguments)
+    public function addCron(CronInterface $cron, string $alias, int $priority, string $expression, string $arguments)
     {
         if (!isset($this->crons[$priority])) {
             $this->crons[$priority] = [];
@@ -52,6 +60,7 @@ class CronHandler
         $cron->setAlias($alias);
         $cron->addArguments($arguments);
         $cron->addPriority($priority);
+        $cron->addExpression($expression);
         $this->crons[$priority][$alias] = $cron;
     }
 

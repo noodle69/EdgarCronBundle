@@ -37,6 +37,9 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
     /** @var int $priority cron priority */
     protected $priority = 100;
 
+    /** @var string */
+    protected $expression;
+
     /** @var string $alias cron alias */
     protected $alias;
 
@@ -92,7 +95,12 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
             $this->month,
             $this->dayOfWeek
         ];
-        return implode(' ', $expression);
+
+        if (!$this->expression) {
+            return implode(' ', $expression);
+        }
+
+        return $this->expression;
     }
 
     /**
@@ -129,6 +137,11 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
         $this->priority = $priority;
     }
 
+    public function addExpression(string $expression)
+    {
+        $this->expression = $expression;
+    }
+
     public function getPriority(): int
     {
         return $this->priority;
@@ -157,7 +170,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
      *
      * @param string $alias cron alias
      */
-    public function setAlias($alias)
+    public function setAlias(string $alias)
     {
         $this->alias = $alias;
     }

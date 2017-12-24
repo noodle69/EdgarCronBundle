@@ -54,6 +54,8 @@ interface CronInterface
 
     public function addPriority($priority);
 
+    public function addExpression(string $expression);
+
     /**
      * Return cron priority
      *
@@ -66,12 +68,12 @@ interface CronInterface
      *
      * @param string $alias cron Alias
      */
-    public function setAlias($alias);
+    public function setAlias(string $alias);
 
     /**
      * Return cron alias
      *
      * @return string cron alias
      */
-    public function getAlias();
+    public function getAlias(): string;
 }

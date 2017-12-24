@@ -35,6 +35,7 @@ class CronPass implements CompilerPassInterface
                     new Reference($id),
                     $attributes['alias'],
                     !isset($attributes['priority']) ? 0 : (int)$attributes['priority'],
+                    !isset($attributes['expression']) ? '* * * * *' : $attributes['expression'],
                     !isset($attributes['arguments']) ? '': $attributes['arguments'],
                 ]);
             }
