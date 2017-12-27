@@ -2,6 +2,7 @@
 
 namespace Edgar\Cron\Cron;
 
+use Cron\CronExpression;
 use Edgar\Cron\Repository\EdgarCronRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Application;
