@@ -50,8 +50,18 @@ interface CronInterface
      */
     public function getArguments(): string;
 
-    public function addPriority($priority);
+    /**
+     * Set Cron priority.
+     *
+     * @param int $priority
+     */
+    public function addPriority(int $priority);
 
+    /**
+     * Set Cron expression.
+     *
+     * @param string $expression
+     */
     public function addExpression(string $expression);
 
     /**

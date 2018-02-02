@@ -10,6 +10,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class CronCommand.
+ *
+ * @package Edgar\CronBundle\Command
  */
 class CronCommand extends ContainerAwareCommand
 {

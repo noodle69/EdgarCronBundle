@@ -18,6 +18,7 @@ class CronHandler
     /** @var int $cronPriority cron priority */
     protected $cronPriority;
 
+    /** @var string $cronExpression */
     protected $cronExpression;
 
     /** @var array $cronArguments cron arguments */

@@ -9,6 +9,11 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class CronStatusCommand.
+ *
+ * @package Edgar\CronBundle\Command
+ */
 class CronStatusCommand extends ContainerAwareCommand
 {
     /**

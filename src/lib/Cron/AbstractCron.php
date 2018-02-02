@@ -121,6 +121,11 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
         $this->arguments = $args;
     }
 
+    /**
+     * List arguments.
+     *
+     * @return string
+     */
     public function getArguments(): string
     {
         $arguments = [];
@@ -131,16 +136,31 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
         return implode(' ', $arguments);
     }
 
-    public function addPriority($priority)
+    /**
+     * Set Cron priority.
+     *
+     * @param int $priority
+     */
+    public function addPriority(int $priority)
     {
         $this->priority = $priority;
     }
 
+    /**
+     * Set Cron expression.
+     *
+     * @param string $expression
+     */
     public function addExpression(string $expression)
     {
         $this->expression = $expression;
     }
 
+    /**
+     * Get Cron priority.
+     *
+     * @return int cron priority
+     */
     public function getPriority(): int
     {
         return $this->priority;
