@@ -3,6 +3,7 @@
 namespace Edgar\CronBundle\DependencyInjection\Compiler;
 
 use Edgar\Cron\Handler\CronHandler;
+use EzSystems\EzPlatformAdminUi\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -12,10 +13,14 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class CronPass implements CompilerPassInterface
 {
+    const TAG_NAME = 'edgar.cron';
+
     /**
      * Fetch all cron by tag edgar:cron.
      *
      * @param ContainerBuilder $container
+     *
+     * @throws InvalidArgumentException
      */
     public function process(ContainerBuilder $container)
     {
@@ -25,10 +30,14 @@ class CronPass implements CompilerPassInterface
 
         $definition = $container->findDefinition(CronHandler::class);
 
-        $taggedServices = $container->findTaggedServiceIds('edgar.cron');
+        $taggedServices = $container->findTaggedServiceIds(self::TAG_NAME);
 
         foreach ($taggedServices as $id => $tags) {
             foreach ($tags as $attributes) {
+                if (!isset($attributes['alias'])) {
+                    throw new InvalidArgumentException($id, 'Tag ' . self::TAG_NAME . ' must contain "alias" argument.');
+                }
+
                 $definition->addMethodCall('addCron', [
                     new Reference($id),
                     $attributes['alias'],
