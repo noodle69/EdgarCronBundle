@@ -1,6 +1,6 @@
 {
   "name": "edgar/cron-bundle",
-  "license": "GPL-2.0",
+  "license": "GPL-2.0-only",
   "type": "symfony-bundle",
   "description": "Cron scheduler",
   "authors": [
