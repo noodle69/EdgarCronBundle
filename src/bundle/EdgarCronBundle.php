@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class EdgarCronBundle extends Bundle
 {
     /**
-     * Build bundle
+     * Build bundle.
      *
      * @param ContainerBuilder $container
      */

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Edgar\Cron\Repository\EdgarCronRepository;
 
 /**
- * EdgarCron
+ * EdgarCron.
  *
  * @ORM\Entity(repositoryClass="Edgar\Cron\Repository\EdgarCronRepository")
  * @ORM\Table(name="edgar_cron")
@@ -50,7 +50,7 @@ class EdgarCron
     private $status = EdgarCronRepository::STATUS_OK;
 
     /**
-     * Get alias
+     * Get alias.
      *
      * @return string
      */
@@ -60,7 +60,7 @@ class EdgarCron
     }
 
     /**
-     * Set alias
+     * Set alias.
      *
      * @param string $alias
      *
@@ -69,11 +69,12 @@ class EdgarCron
     public function setAlias(string $alias): self
     {
         $this->alias = $alias;
+
         return $this;
     }
 
     /**
-     * Set queued
+     * Set queued.
      *
      * @param \DateTime $queued
      *
@@ -82,11 +83,12 @@ class EdgarCron
     public function setQueued(\DateTime $queued): self
     {
         $this->queued = $queued;
+
         return $this;
     }
 
     /**
-     * Get queued
+     * Get queued.
      *
      * @return \DateTime
      */
@@ -96,7 +98,7 @@ class EdgarCron
     }
 
     /**
-     * Set started
+     * Set started.
      *
      * @param \DateTime $started
      *
@@ -105,11 +107,12 @@ class EdgarCron
     public function setStarted(?\DateTime $started): self
     {
         $this->started = $started;
+
         return $this;
     }
 
     /**
-     * Get started
+     * Get started.
      *
      * @return \DateTime
      */
@@ -119,7 +122,7 @@ class EdgarCron
     }
 
     /**
-     * Set ended
+     * Set ended.
      *
      * @param \DateTime $ended
      *
@@ -128,11 +131,12 @@ class EdgarCron
     public function setEnded(?\DateTime $ended): self
     {
         $this->ended = $ended;
+
         return $this;
     }
 
     /**
-     * Get ended
+     * Get ended.
      *
      * @return \DateTime
      */
@@ -142,20 +146,21 @@ class EdgarCron
     }
 
     /**
-     * Set status
+     * Set status.
      *
-     * @param integer $status
+     * @param int $status
      *
      * @return EdgarCron
      */
     public function setStatus(int $status): self
     {
         $this->status = $status;
+
         return $this;
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return integer
      */

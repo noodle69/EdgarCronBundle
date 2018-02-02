@@ -4,12 +4,11 @@ namespace Edgar\Cron\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Edgar\CronBundle\Entity\EdgarCron;
 
 /**
- * Class EdgarCronRepository
- * @package Edgar\Cron\Repository
+ * Class EdgarCronRepository.
  */
 class EdgarCronRepository extends EntityRepository
 {
@@ -18,9 +17,10 @@ class EdgarCronRepository extends EntityRepository
     public const STATUS_ERROR = 2;
 
     /**
-     * Identify of cron command is queued
+     * Identify of cron command is queued.
      *
      * @param string $alias cron alias
+     *
      * @return bool true if cron is already queued
      */
     public function isQueued(string $alias): bool
@@ -36,7 +36,7 @@ class EdgarCronRepository extends EntityRepository
             if ($result) {
                 return true;
             }
-        } catch(NonUniqueResultException $e) {
+        } catch (NonUniqueResultException $e) {
             return false;
         }
 
@@ -44,11 +44,13 @@ class EdgarCronRepository extends EntityRepository
     }
 
     /**
-     * Add cron to queued
+     * Add cron to queued.
      *
      * @param string $alias cron alias
+     *
+     * @return bool
      */
-    public function addQueued($alias)
+    public function addQueued($alias): bool
     {
         $query = $this->createQueryBuilder('c')
             ->where('c.alias = :alias')
@@ -68,21 +70,23 @@ class EdgarCronRepository extends EntityRepository
             $edgarCron->setAlias($alias);
         }
 
-        $now = new \DateTime('now');
-        $edgarCron->setQueued($now);
-        $edgarCron->setStarted(null);
-        $edgarCron->setEnded(null);
-        $edgarCron->setStatus(self::STATUS_INIT);
-        $this->getEntityManager()->persist($edgarCron);
-
         try {
+            $now = new \DateTime('now');
+            $edgarCron->setQueued($now);
+            $edgarCron->setStarted(null);
+            $edgarCron->setEnded(null);
+            $edgarCron->setStatus(self::STATUS_INIT);
+            $this->getEntityManager()->persist($edgarCron);
             $this->getEntityManager()->flush();
-        } catch(OptimisticLockException $e) {
+        } catch (ORMException $e) {
+            return false;
         }
+
+        return true;
     }
 
     /**
-     * List cron command queued
+     * List cron command queued.
      *
      * @return EdgarCron[] cron commands queued
      */
@@ -97,39 +101,47 @@ class EdgarCronRepository extends EntityRepository
     }
 
     /**
-     * Run cron command
+     * Run cron command.
      *
      * @param EdgarCron $edgarCron cron command
+     *
+     * @return bool
      */
-    public function run(EdgarCron $edgarCron)
+    public function run(EdgarCron $edgarCron): bool
     {
-        $now = new \DateTime('now');
-        $edgarCron->setStarted($now);
-        $this->getEntityManager()->persist($edgarCron);
-
         try {
+            $now = new \DateTime('now');
+            $edgarCron->setStarted($now);
+            $this->getEntityManager()->persist($edgarCron);
             $this->getEntityManager()->flush();
-        } catch(OptimisticLockException $e) {
+        } catch (ORMException $e) {
+            return false;
         }
+
+        return true;
     }
 
     /**
-     * End cron command
+     * End cron command.
      *
      * @param EdgarCron $edgarCron cron command
      * @param int $status cron command status
+     *
+     * @return bool
      */
-    public function end(EdgarCron $edgarCron, int $status = self::STATUS_OK)
+    public function end(EdgarCron $edgarCron, int $status = self::STATUS_OK): bool
     {
-        $now = new \DateTime('now');
-        $edgarCron->setEnded($now);
-        $edgarCron->setStatus($status);
-        $this->getEntityManager()->persist($edgarCron);
-
         try {
+            $now = new \DateTime('now');
+            $edgarCron->setEnded($now);
+            $edgarCron->setStatus($status);
+            $this->getEntityManager()->persist($edgarCron);
             $this->getEntityManager()->flush();
-        } catch(OptimisticLockException $e) {
+        } catch (ORMException $e) {
+            return false;
         }
+
+        return true;
     }
 
     /**

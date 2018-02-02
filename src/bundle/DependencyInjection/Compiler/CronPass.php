@@ -8,14 +8,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Class CronPass
- *
- * @package Edgar\CronBundle\DependencyInjection\Compiler
+ * Class CronPass.
  */
 class CronPass implements CompilerPassInterface
 {
     /**
-     * Fetch all cron by tag edgar:cron
+     * Fetch all cron by tag edgar:cron.
      *
      * @param ContainerBuilder $container
      */
@@ -36,7 +34,7 @@ class CronPass implements CompilerPassInterface
                     $attributes['alias'],
                     !isset($attributes['priority']) ? 0 : (int)$attributes['priority'],
                     !isset($attributes['expression']) ? '* * * * *' : $attributes['expression'],
-                    !isset($attributes['arguments']) ? '': $attributes['arguments'],
+                    !isset($attributes['arguments']) ? '' : $attributes['arguments'],
                 ]);
             }
         }

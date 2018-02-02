@@ -5,8 +5,7 @@ namespace Edgar\Cron\Handler;
 use Edgar\Cron\Cron\CronInterface;
 
 /**
- * Class CronHandler
- * @package Edgar\Cron\Handler
+ * Class CronHandler.
  */
 class CronHandler
 {
@@ -16,9 +15,10 @@ class CronHandler
     /** @var string $cronAlias cron alias */
     protected $cronAlias;
 
-    /** @var integer $cronPriority cron priority */
+    /** @var int $cronPriority cron priority */
     protected $cronPriority;
 
+    /** @var string $cronExpression */
     protected $cronExpression;
 
     /** @var array $cronArguments cron arguments */
@@ -28,7 +28,7 @@ class CronHandler
      * CronHandler constructor.
      *
      * @param string $cronAlias
-     * @param integer $cronPriority
+     * @param int $cronPriority
      * @param array $arguments
      */
     public function __construct(
@@ -44,7 +44,7 @@ class CronHandler
     }
 
     /**
-     * Add cron to crons list
+     * Add cron to crons list.
      *
      * @param CronInterface $cron cron
      * @param string $alias cron alias
@@ -65,7 +65,7 @@ class CronHandler
     }
 
     /**
-     * Sort and return crons list
+     * Sort and return crons list.
      *
      * @return CronInterface[] crons list
      */
@@ -79,6 +79,7 @@ class CronHandler
                 $crons[$priority . ';' . $cron->getAlias()] = $cron;
             }
         }
+
         return $crons;
     }
 }

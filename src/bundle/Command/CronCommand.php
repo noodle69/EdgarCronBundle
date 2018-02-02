@@ -9,14 +9,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class CronCommand
- *
- * @package Edgar\CronBundle\Command
+ * Class CronCommand.
  */
 class CronCommand extends ContainerAwareCommand
 {
     /**
-     * Configure command
+     * Configure command.
      */
     protected function configure()
     {
@@ -26,7 +24,7 @@ class CronCommand extends ContainerAwareCommand
     }
 
     /**
-     * Execute command
+     * Execute command.
      *
      * @param InputInterface  $input Input interface
      * @param OutputInterface $output Output interface

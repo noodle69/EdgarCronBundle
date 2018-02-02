@@ -11,8 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class CronService
- * @package Edgar\CronBundle\Service
+ * Class CronService.
  */
 class CronService
 {
@@ -36,7 +35,7 @@ class CronService
     }
 
     /**
-     * List cron commands
+     * List cron commands.
      *
      * @return CronInterface[] cron command list
      */
@@ -46,9 +45,10 @@ class CronService
     }
 
     /**
-     * Identify if cron command is queued
+     * Identify if cron command is queued.
      *
      * @param string $alias cron alias
+     *
      * @return bool true if cron command is queued
      */
     public function isQueued(string $alias): bool
@@ -57,7 +57,7 @@ class CronService
     }
 
     /**
-     * Add cron command to queue
+     * Add cron command to queue.
      *
      * @param string $alias cron alias
      */
@@ -67,7 +67,7 @@ class CronService
     }
 
     /**
-     * Return cron queued
+     * Return cron queued.
      *
      * @return EdgarCron[] list cron queued
      */
@@ -78,17 +78,19 @@ class CronService
     }
 
     /**
-     * Run cron command
+     * Run cron command.
      *
      * @param EdgarCron $edgarCron
+     *
+     * @return bool
      */
-    public function run(EdgarCron $edgarCron)
+    public function run(EdgarCron $edgarCron): bool
     {
-        $this->repository->run($edgarCron);
+        return $this->repository->run($edgarCron);
     }
 
     /**
-     * End cron command
+     * End cron command.
      *
      * @param EdgarCron $edgarCron
      * @param int $status
@@ -99,7 +101,7 @@ class CronService
     }
 
     /**
-     * List cron commands identified as queued
+     * List cron commands identified as queued.
      *
      * @param InputInterface $input input interface
      * @param OutputInterface $output output interface
@@ -120,16 +122,17 @@ class CronService
         if ($edgarCrons) {
             foreach ($edgarCrons as $edgarCron) {
                 if (isset($cronAlias[$edgarCron->getAlias()])) {
-                    $this->run($edgarCron);
-                    $status = $cronAlias[$edgarCron->getAlias()]->run($input, $output);
-                    $this->end($edgarCron, $status);
+                    if ($this->run($edgarCron)) {
+                        $status = $cronAlias[$edgarCron->getAlias()]->run($input, $output);
+                        $this->end($edgarCron, $status);
+                    }
                 }
             }
         }
     }
 
     /**
-     * Return cron list and status
+     * Return cron list and status.
      *
      * @return EdgarCron[] cron list with status
      */
@@ -152,6 +155,7 @@ class CronService
                 }
             }
         }
+
         return $cronAlias;
     }
 }
