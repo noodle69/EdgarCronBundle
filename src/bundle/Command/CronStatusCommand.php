@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CronStatusCommand extends ContainerAwareCommand
 {
     /**
-     * Configure command
+     * Configure command.
      */
     protected function configure()
     {
@@ -22,7 +22,7 @@ class CronStatusCommand extends ContainerAwareCommand
     }
 
     /**
-     * Execute command
+     * Execute command.
      *
      * @param InputInterface  $input Input interface
      * @param OutputInterface $output Output interface
@@ -40,7 +40,7 @@ class CronStatusCommand extends ContainerAwareCommand
                 $cron instanceof EdgarCron ? $cron->getQueued()->format('d-m-Y H:i') : false,
                 $cron instanceof EdgarCron ? $cron->getStarted()->format('d-m-Y H:i') : false,
                 $cron instanceof EdgarCron ? $cron->getEnded()->format('d-m-Y H:i') : false,
-                $cron instanceof EdgarCron ? $cron->getStatus() : false
+                $cron instanceof EdgarCron ? $cron->getStatus() : false,
             ];
         }
 

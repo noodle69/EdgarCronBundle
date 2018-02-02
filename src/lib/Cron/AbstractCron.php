@@ -10,9 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class AbstractCron
- *
- * @package Edgar\Cron\Cron
+ * Class AbstractCron.
  */
 abstract class AbstractCron extends ContainerAwareCommand implements CronInterface
 {
@@ -22,7 +20,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
     /** @var string $hour hour minute expression part */
     protected $hour = '*';
 
-    /** @var string $dayOfMonth day of month minute expression part*/
+    /** @var string $dayOfMonth day of month minute expression part */
     protected $dayOfMonth = '*';
 
     /** @var string $month month minute expression part */
@@ -44,7 +42,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
     protected $alias;
 
     /**
-     * Init Application context
+     * Init Application context.
      *
      * @param Application $application
      */
@@ -54,7 +52,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
     }
 
     /**
-     * Execute command
+     * Execute command.
      *
      * @param InputInterface  $input Input interface
      * @param OutputInterface $output Output interface
@@ -62,7 +60,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
     public function run(InputInterface $input, OutputInterface $output): ?int
     {
         $return = $this->execute($input, $output);
-        if (is_null($return)) {
+        if (null === $return) {
             $return = EdgarCronRepository::STATUS_OK;
         }
 
@@ -70,7 +68,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
     }
 
     /**
-     * Check cron expression
+     * Check cron expression.
      *
      * @return bool true if cron should be executed
      */
@@ -78,11 +76,12 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
     {
         $expression = $this->getExpression();
         $cron = CronExpression::factory($expression);
+
         return $cron->isDue();
     }
 
     /**
-     * Return the cron expression
+     * Return the cron expression.
      *
      * @return string cron expression
      */
@@ -93,7 +92,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
             $this->hour,
             $this->dayOfMonth,
             $this->month,
-            $this->dayOfWeek
+            $this->dayOfWeek,
         ];
 
         if (!$this->expression) {
@@ -104,7 +103,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
     }
 
     /**
-     * Add cron arguments
+     * Add cron arguments.
      *
      * @param string $arguments cron arguments
      */
@@ -112,8 +111,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
     {
         $args = [];
         preg_match_all('/(?P<argument>\w+):(?P<value>[\w+\-]+)/', $arguments, $matches);
-        if (isset($matches['argument']))
-        {
+        if (isset($matches['argument'])) {
             foreach ($matches['argument'] as $key => $argKey) {
                 if (isset($matches['value'][$key])) {
                     $args[$argKey] = $matches['value'][$key];
@@ -129,6 +127,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
         foreach ($this->arguments as $key => $val) {
             $arguments[] = $key . ':' . $val;
         }
+
         return implode(' ', $arguments);
     }
 
@@ -148,10 +147,11 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
     }
 
     /**
-     * Get Cron arguments
+     * Get Cron arguments.
      *
      * @param InputInterface $input Input interface
      * @param string $key
+     *
      * @return mixed return argument from input or tag settings
      */
     public function getArgument(InputInterface $input, $key): ?string
@@ -162,11 +162,12 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
         if (isset($this->arguments[$key])) {
             return $this->arguments[$key];
         }
+
         return null;
     }
 
     /**
-     * Set cron alias
+     * Set cron alias.
      *
      * @param string $alias cron alias
      */
@@ -176,7 +177,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
     }
 
     /**
-     * Get cron alias
+     * Get cron alias.
      *
      * @return string cron alias
      */

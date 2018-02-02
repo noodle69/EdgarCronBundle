@@ -8,8 +8,7 @@ use Doctrine\ORM\OptimisticLockException;
 use Edgar\CronBundle\Entity\EdgarCron;
 
 /**
- * Class EdgarCronRepository
- * @package Edgar\Cron\Repository
+ * Class EdgarCronRepository.
  */
 class EdgarCronRepository extends EntityRepository
 {
@@ -18,9 +17,10 @@ class EdgarCronRepository extends EntityRepository
     public const STATUS_ERROR = 2;
 
     /**
-     * Identify of cron command is queued
+     * Identify of cron command is queued.
      *
      * @param string $alias cron alias
+     *
      * @return bool true if cron is already queued
      */
     public function isQueued(string $alias): bool
@@ -36,7 +36,7 @@ class EdgarCronRepository extends EntityRepository
             if ($result) {
                 return true;
             }
-        } catch(NonUniqueResultException $e) {
+        } catch (NonUniqueResultException $e) {
             return false;
         }
 
@@ -44,7 +44,7 @@ class EdgarCronRepository extends EntityRepository
     }
 
     /**
-     * Add cron to queued
+     * Add cron to queued.
      *
      * @param string $alias cron alias
      */
@@ -77,12 +77,12 @@ class EdgarCronRepository extends EntityRepository
 
         try {
             $this->getEntityManager()->flush();
-        } catch(OptimisticLockException $e) {
+        } catch (OptimisticLockException $e) {
         }
     }
 
     /**
-     * List cron command queued
+     * List cron command queued.
      *
      * @return EdgarCron[] cron commands queued
      */
@@ -97,7 +97,7 @@ class EdgarCronRepository extends EntityRepository
     }
 
     /**
-     * Run cron command
+     * Run cron command.
      *
      * @param EdgarCron $edgarCron cron command
      */
@@ -109,12 +109,12 @@ class EdgarCronRepository extends EntityRepository
 
         try {
             $this->getEntityManager()->flush();
-        } catch(OptimisticLockException $e) {
+        } catch (OptimisticLockException $e) {
         }
     }
 
     /**
-     * End cron command
+     * End cron command.
      *
      * @param EdgarCron $edgarCron cron command
      * @param int $status cron command status
@@ -128,7 +128,7 @@ class EdgarCronRepository extends EntityRepository
 
         try {
             $this->getEntityManager()->flush();
-        } catch(OptimisticLockException $e) {
+        } catch (OptimisticLockException $e) {
         }
     }
 

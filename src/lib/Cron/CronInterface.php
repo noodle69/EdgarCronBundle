@@ -7,9 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Interface CronInterface
- *
- * @package Edgar\Cron\Cron
+ * Interface CronInterface.
  */
 interface CronInterface
 {
@@ -17,7 +15,7 @@ interface CronInterface
     public function initApplication(Application $application);
 
     /**
-     * Execute command
+     * Execute command.
      *
      * @param InputInterface  $input Input interface
      * @param OutputInterface $output Output interface
@@ -25,28 +23,28 @@ interface CronInterface
     public function run(InputInterface $input, OutputInterface $output): ?int;
 
     /**
-     * Check cron expression
+     * Check cron expression.
      *
      * @return bool true if cron should be executed
      */
     public function isDue(): bool;
 
     /**
-     * Return the cron expression
+     * Return the cron expression.
      *
      * @return string cron expression
      */
     public function getExpression(): string;
 
     /**
-     * Add cron arguments
+     * Add cron arguments.
      *
      * @param string $arguments cron arguments
      */
     public function addArguments(?string $arguments = null);
 
     /**
-     * Return cron arguments
+     * Return cron arguments.
      *
      * @return string cron arguments
      */
@@ -57,21 +55,21 @@ interface CronInterface
     public function addExpression(string $expression);
 
     /**
-     * Return cron priority
+     * Return cron priority.
      *
      * @return int cron priority
      */
     public function getPriority(): int;
 
     /**
-     * Set cron alias
+     * Set cron alias.
      *
      * @param string $alias cron Alias
      */
     public function setAlias(string $alias);
 
     /**
-     * Return cron alias
+     * Return cron alias.
      *
      * @return string cron alias
      */
