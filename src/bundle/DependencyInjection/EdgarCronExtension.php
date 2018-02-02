@@ -9,8 +9,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Class EdgarCronExtension.
- *
- * @package Edgar\CronBundle\DependencyInjection
  */
 class EdgarCronExtension extends Extension
 {

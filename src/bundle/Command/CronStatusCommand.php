@@ -11,8 +11,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class CronStatusCommand.
- *
- * @package Edgar\CronBundle\Command
  */
 class CronStatusCommand extends ContainerAwareCommand
 {

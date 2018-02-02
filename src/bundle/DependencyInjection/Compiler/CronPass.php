@@ -9,8 +9,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class CronPass.
- *
- * @package Edgar\CronBundle\DependencyInjection\Compiler
  */
 class CronPass implements CompilerPassInterface
 {
