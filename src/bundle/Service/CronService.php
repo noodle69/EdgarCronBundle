@@ -81,10 +81,12 @@ class CronService
      * Run cron command.
      *
      * @param EdgarCron $edgarCron
+     *
+     * @return bool
      */
-    public function run(EdgarCron $edgarCron)
+    public function run(EdgarCron $edgarCron): bool
     {
-        $this->repository->run($edgarCron);
+        return $this->repository->run($edgarCron);
     }
 
     /**
@@ -120,9 +122,10 @@ class CronService
         if ($edgarCrons) {
             foreach ($edgarCrons as $edgarCron) {
                 if (isset($cronAlias[$edgarCron->getAlias()])) {
-                    $this->run($edgarCron);
-                    $status = $cronAlias[$edgarCron->getAlias()]->run($input, $output);
-                    $this->end($edgarCron, $status);
+                    if ($this->run($edgarCron)) {
+                        $status = $cronAlias[$edgarCron->getAlias()]->run($input, $output);
+                        $this->end($edgarCron, $status);
+                    }
                 }
             }
         }

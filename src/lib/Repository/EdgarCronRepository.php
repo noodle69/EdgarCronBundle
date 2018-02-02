@@ -4,7 +4,7 @@ namespace Edgar\Cron\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Edgar\CronBundle\Entity\EdgarCron;
 
 /**
@@ -47,8 +47,10 @@ class EdgarCronRepository extends EntityRepository
      * Add cron to queued.
      *
      * @param string $alias cron alias
+     *
+     * @return bool
      */
-    public function addQueued($alias)
+    public function addQueued($alias): bool
     {
         $query = $this->createQueryBuilder('c')
             ->where('c.alias = :alias')
@@ -68,17 +70,19 @@ class EdgarCronRepository extends EntityRepository
             $edgarCron->setAlias($alias);
         }
 
-        $now = new \DateTime('now');
-        $edgarCron->setQueued($now);
-        $edgarCron->setStarted(null);
-        $edgarCron->setEnded(null);
-        $edgarCron->setStatus(self::STATUS_INIT);
-        $this->getEntityManager()->persist($edgarCron);
-
         try {
+            $now = new \DateTime('now');
+            $edgarCron->setQueued($now);
+            $edgarCron->setStarted(null);
+            $edgarCron->setEnded(null);
+            $edgarCron->setStatus(self::STATUS_INIT);
+            $this->getEntityManager()->persist($edgarCron);
             $this->getEntityManager()->flush();
-        } catch (OptimisticLockException $e) {
+        } catch (ORMException $e) {
+            return false;
         }
+
+        return true;
     }
 
     /**
@@ -100,17 +104,21 @@ class EdgarCronRepository extends EntityRepository
      * Run cron command.
      *
      * @param EdgarCron $edgarCron cron command
+     *
+     * @return bool
      */
-    public function run(EdgarCron $edgarCron)
+    public function run(EdgarCron $edgarCron): bool
     {
-        $now = new \DateTime('now');
-        $edgarCron->setStarted($now);
-        $this->getEntityManager()->persist($edgarCron);
-
         try {
+            $now = new \DateTime('now');
+            $edgarCron->setStarted($now);
+            $this->getEntityManager()->persist($edgarCron);
             $this->getEntityManager()->flush();
-        } catch (OptimisticLockException $e) {
+        } catch (ORMException $e) {
+            return false;
         }
+
+        return true;
     }
 
     /**
@@ -118,18 +126,22 @@ class EdgarCronRepository extends EntityRepository
      *
      * @param EdgarCron $edgarCron cron command
      * @param int $status cron command status
+     *
+     * @return bool
      */
-    public function end(EdgarCron $edgarCron, int $status = self::STATUS_OK)
+    public function end(EdgarCron $edgarCron, int $status = self::STATUS_OK): bool
     {
-        $now = new \DateTime('now');
-        $edgarCron->setEnded($now);
-        $edgarCron->setStatus($status);
-        $this->getEntityManager()->persist($edgarCron);
-
         try {
+            $now = new \DateTime('now');
+            $edgarCron->setEnded($now);
+            $edgarCron->setStatus($status);
+            $this->getEntityManager()->persist($edgarCron);
             $this->getEntityManager()->flush();
-        } catch (OptimisticLockException $e) {
+        } catch (ORMException $e) {
+            return false;
         }
+
+        return true;
     }
 
     /**
