@@ -116,7 +116,7 @@ class EdgarCron
      *
      * @return \DateTime
      */
-    public function getStarted(): \DateTime
+    public function getStarted(): ?\DateTime
     {
         return $this->started;
     }
