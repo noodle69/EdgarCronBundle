@@ -67,6 +67,14 @@ class CronService
     }
 
     /**
+     * @param string $alias
+     */
+    public function removeQueued(string $alias)
+    {
+        $this->repository->removeQueued($alias);
+    }
+
+    /**
      * Return cron queued.
      *
      * @return EdgarCron[] list cron queued

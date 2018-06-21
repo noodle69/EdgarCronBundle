@@ -50,7 +50,7 @@ class EdgarCronRepository extends EntityRepository
      *
      * @return bool
      */
-    public function addQueued($alias): bool
+    public function addQueued(string $alias): bool
     {
         $query = $this->createQueryBuilder('c')
             ->where('c.alias = :alias')
@@ -77,6 +77,38 @@ class EdgarCronRepository extends EntityRepository
             $edgarCron->setEnded(null);
             $edgarCron->setStatus(self::STATUS_INIT);
             $this->getEntityManager()->persist($edgarCron);
+            $this->getEntityManager()->flush();
+        } catch (ORMException $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param string $alias
+     * @return bool
+     */
+    public function removeQueued(string $alias): bool
+    {
+        $query = $this->createQueryBuilder('c')
+            ->where('c.alias = :alias')
+            ->setParameter('alias', $alias)
+            ->getQuery();
+
+        try {
+            /** @var EdgarCron $edgarCron */
+            $edgarCron = $query->setMaxResults(1)->getOneOrNullResult();
+        } catch (NonUniqueResultException $e) {
+            return false;
+        }
+
+        if (!$edgarCron) {
+            return false;
+        }
+
+        try {
+            $this->getEntityManager()->remove($edgarCron);
             $this->getEntityManager()->flush();
         } catch (ORMException $e) {
             return false;
