@@ -29,7 +29,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
     /** @var string $dayOfWeek day of week minute expression part */
     protected $dayOfWeek = '*';
 
-    /** @var [] $arguments cron arguments */
+    /** @var array $arguments cron arguments */
     protected $arguments = [];
 
     /** @var int $priority cron priority */
@@ -172,7 +172,7 @@ abstract class AbstractCron extends ContainerAwareCommand implements CronInterfa
      * @param InputInterface $input Input interface
      * @param string $key
      *
-     * @return mixed return argument from input or tag settings
+     * @return string|null return argument from input or tag settings
      */
     public function getArgument(InputInterface $input, $key): ?string
     {
