@@ -16,7 +16,7 @@ class EdgarCron
     /**
      * @var string
      *
-     * @ORM\Column(name="alias", type="string", length=255, nullable=false)
+     * @ORM\Column(name="alias", type="string", length=191, nullable=false)
      * @ORM\Id
      */
     private $alias;
